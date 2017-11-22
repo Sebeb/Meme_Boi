@@ -8,7 +8,6 @@ public class enemy : MonoBehaviour {
     BoxCollider collider;
 
     public bool dead;
-    float deadX;
 
     void Awake()
     {
@@ -27,24 +26,34 @@ public class enemy : MonoBehaviour {
         if (!dead)
         {
             dead = true;
-            deadX = transform.position.x;
+            rigidBody.constraints = RigidbodyConstraints.None;
+            GetComponent<zMovement>().moving = false;
             gameObject.layer = 21;
             rigidBody.useGravity = true;
-            rigidBody.constraints = RigidbodyConstraints.None;
-            rigidBody.AddForce(new Vector3(0, 100, 150));
+            collider.material = Resources.Load("Materials/NotBouncy") as PhysicMaterial;
+            rigidBody.AddForce(new Vector3(0, 40, 0));
+
+        }
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.layer == 23 && dead)
+        {
+            rigidBody.velocity = new Vector3(rigidBody.velocity.x, rigidBody.velocity.y,
+                                             Mathf.Clamp(rigidBody.velocity.z-1, -game.controller.speed,20));
         }
     }
 
     void Update()
     {
+        
         if (dead)
         {
-            if (transform.position.x > -game.controller.upperBound)
+            if (audioSource.pitch > 0.035f)
             {
-                audioSource.pitch = (transform.position.x+game.controller.upperBound)/(deadX+game.controller.upperBound) ;
+                audioSource.pitch /= 1.015f;
             }
-            else
-                audioSource.Stop();
         }
     }
 

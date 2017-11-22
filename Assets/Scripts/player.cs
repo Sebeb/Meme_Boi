@@ -44,8 +44,8 @@ public class player : MonoBehaviour
             case (Weapons.MNH):
                 GameObject bullet = Resources.Load("Weapons/MNH/Bullet") as GameObject;
                 reloadTime = Time.time + bullet.GetComponent<basicBullet>().reloadTime;
-                GameObject spawnedBullet = Instantiate(bullet, transform.position, bullet.transform.rotation);
-                spawnedBullet.transform.parent = transform;
+                GameObject spawnedBullet = Instantiate(bullet, transform.position + new Vector3(0, 0, 0.5f), bullet.transform.rotation);
+                spawnedBullet.transform.parent = game.controller.tunnel.transform;
                 fireSFX.PlaySound();
                 break;
         }

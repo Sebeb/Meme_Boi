@@ -9,12 +9,15 @@ public class game : MonoBehaviour
     public float spawnZ;
     public float speed;
     public float upperBound, rightBound;
+    [HideInInspector]
+    public GameObject tunnel;
 
 
     void Awake()
     {
         controller = this;
         spawner = GameObject.Find("Spawner").GetComponent<spawner>();
+        tunnel = GameObject.Find("Tunnel");
     }
 
     void Start () {

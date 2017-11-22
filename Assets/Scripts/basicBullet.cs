@@ -14,7 +14,6 @@ public class basicBullet : MonoBehaviour {
 
 	void Start () {
 		rigidBody.velocity = new Vector3 (0, 0, speed);
-		
 	}
 	
 
@@ -29,9 +28,7 @@ public class basicBullet : MonoBehaviour {
         if (collision.gameObject.GetComponent<enemy>()!=null){
             GameObject otherObejct = collision.gameObject;
             otherObejct.GetComponent<enemy>().OnHit();
-            Destroy(gameObject);
-
-
+            Destroy(gameObject, 0.3f);
         }
     }
 }
