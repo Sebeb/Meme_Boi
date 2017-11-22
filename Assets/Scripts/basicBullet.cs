@@ -18,7 +18,20 @@ public class basicBullet : MonoBehaviour {
 	}
 	
 
-	void Update () {
-		
-	}
+    void FixedUpdate()
+    {
+        if (transform.position.z > game.controller.spawnZ)
+            Destroy(gameObject);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<enemy>()!=null){
+            GameObject otherObejct = collision.gameObject;
+            otherObejct.GetComponent<enemy>().OnHit();
+            Destroy(gameObject);
+
+
+        }
+    }
 }

@@ -6,8 +6,11 @@ public class spawner : MonoBehaviour {
 
     public float lightSpawnTime;
     float nextLightSpawn;
+    GameObject tunnel;
 
 	void Start () {
+        game.controller.spawnZ = transform.position.z;
+        tunnel = GameObject.Find("Tunnel");
 		
 	}
 
@@ -17,7 +20,8 @@ public class spawner : MonoBehaviour {
         #region Light Spawn
         if (Time.fixedTime>nextLightSpawn){
             nextLightSpawn += lightSpawnTime;
-            Instantiate(Resources.Load("Light", typeof(GameObject)),transform.position,Quaternion.identity);
+            GameObject light = Instantiate(Resources.Load("Light", typeof(GameObject)),transform.position,Quaternion.identity)as GameObject;
+            light.transform.parent = tunnel.transform;
         }
 #endregion
     }

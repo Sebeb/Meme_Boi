@@ -2,38 +2,62 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class player : MonoBehaviour {
-    [Range(0,1)]
+public class player : MonoBehaviour
+{
+    [Range(0, 1)]
     public float movementSpeed;
-	public CurrentWeapon currentWeapon;
-	public float reloadTime;
+    public Weapons currentWeapon;
+    float reloadTime;
+    public sfxManager fireSFX;
 
 
-	void Start () {
-		
-	}
-	
-	void Update (){
-		if (Input.GetAxis ("Fire1")>0 && reloadTime <= Time.time) {
-			Fire ();
-		}
-	}
+    void Start()
+    {
+        SwitchWeapon(Weapons.MNH);
+    }
 
-	void Fire(){
-		switch (currentWeapon) {
-		case (CurrentWeapon.Texture):
-			GameObject bullet = Resources.Load ("Weapons/TexNotFound") as GameObject;
-			reloadTime = Time.time + bullet.GetComponent<basicBullet> ().reloadTime;
-			Instantiate (bullet,transform.position,bullet.transform.rotation);
-			break;
-		}
-	}
+    void Update()
+    {
+        if (Input.GetAxis("Fire1") > 0 && reloadTime <= Time.time)
+        {
+            Fire();
+        }
+    }
 
-	void FixedUpdate () {
-        transform.position += new Vector3(Input.GetAxis("Horizontal")*movementSpeed, 
-                                          Input.GetAxis("Vertical")*movementSpeed,0);
-		
-	}
+    void SwitchWeapon(Weapons weapon)
+    {
+        currentWeapon = weapon;
+        switch (weapon)
+        {
+            case Weapons.MNH:
+                GameObject soundManager = Instantiate(Resources.Load("Weapons/MNH/SFX Manager")) as GameObject;
+                fireSFX = soundManager.GetComponent<sfxManager>();
+                soundManager.transform.parent = transform;
+                break;
+        }
+    }
+
+    void Fire()
+    {
+        switch (currentWeapon)
+        {
+            case (Weapons.MNH):
+                GameObject bullet = Resources.Load("Weapons/MNH/Bullet") as GameObject;
+                reloadTime = Time.time + bullet.GetComponent<basicBullet>().reloadTime;
+                GameObject spawnedBullet = Instantiate(bullet, transform.position, bullet.transform.rotation);
+                spawnedBullet.transform.parent = transform;
+                fireSFX.PlaySound();
+                break;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        transform.position = new Vector3(
+            Mathf.Clamp(transform.position.x + Input.GetAxis("Horizontal") * movementSpeed, -game.controller.rightBound, game.controller.rightBound),
+            Mathf.Clamp(transform.position.y + Input.GetAxis("Vertical") * movementSpeed, -game.controller.upperBound, game.controller.upperBound), 0);
+
+    }
 }
 
-public enum CurrentWeapon {Texture, Other};
+public enum Weapons { MNH, Other };

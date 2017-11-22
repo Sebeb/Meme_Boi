@@ -6,8 +6,10 @@ public class game : MonoBehaviour
 {
     public static game controller;
     public static spawner spawner;
-
+    public float spawnZ;
     public float speed;
+    public float upperBound, rightBound;
+
 
     void Awake()
     {
