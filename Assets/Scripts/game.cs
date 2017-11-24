@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class game : MonoBehaviour
 {
-    public static game controller;
+	public int levels;
+	[Range (1,5)]
+	public int level;
+	public static game controller;
     public static spawner spawner;
     public float spawnZ;
     public float speed;
     public float upperBound, rightBound;
     [HideInInspector]
     public GameObject tunnel;
+	public int score;
+	public int lives;
+	public enemy targetedEnemy;
+
 
 
     void Awake()
@@ -21,7 +28,6 @@ public class game : MonoBehaviour
     }
 
     void Start () {
-		
 	}
 	
 	void Update () {

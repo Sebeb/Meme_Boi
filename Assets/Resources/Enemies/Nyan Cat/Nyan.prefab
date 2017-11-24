@@ -22,12 +22,13 @@ GameObject:
   - component: {fileID: 114007205927590608}
   - component: {fileID: 114331968374688080}
   - component: {fileID: 114240044479135340}
+  - component: {fileID: 114464415011888952}
   - component: {fileID: 212174072326842504}
   - component: {fileID: 95203710096628098}
   - component: {fileID: 54190159845286730}
   - component: {fileID: 65282803370268288}
   - component: {fileID: 82840098643875728}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Nyan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +44,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4841835475213884}
   - component: {fileID: 96631535736727480}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Trail (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +60,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4969273270939370}
   - component: {fileID: 96619955104325674}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Trail (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +76,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4129454863490610}
   - component: {fileID: 96921730987612260}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Trail (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4745455499158646}
   - component: {fileID: 96798778888318974}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Trail (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4936265992036980}
   - component: {fileID: 96639738001784508}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Trail (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4698006130269728}
   - component: {fileID: 96098313692662152}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4919621865384488}
   - component: {fileID: 96501795276641082}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Trail (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1064,6 +1065,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: -35
   moving: 1
+--- !u!114 &114464415011888952
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1185072869150114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad55b4a5c5a9894984d224431180520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212174072326842504
 SpriteRenderer:
   m_ObjectHideFlags: 1

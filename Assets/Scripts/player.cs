@@ -53,10 +53,11 @@ public class player : MonoBehaviour
 
     void FixedUpdate()
     {
+		#region Movement
         transform.position = new Vector3(
             Mathf.Clamp(transform.position.x + Input.GetAxis("Horizontal") * movementSpeed, -game.controller.rightBound, game.controller.rightBound),
             Mathf.Clamp(transform.position.y + Input.GetAxis("Vertical") * movementSpeed, -game.controller.upperBound, game.controller.upperBound), 0);
-
+		#endregion
     }
 }
 
