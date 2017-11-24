@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f514a0873e6f84f3a90c13daaf683f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0.217
+  movementSpeed: 0.334
   currentWeapon: 0
   fireSFX: {fileID: 0}
 --- !u!23 &510659071
@@ -474,7 +474,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 654364888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 552, y: 310.5, z: 0}
+  m_LocalPosition: {x: 457, y: 257, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 43639436}
@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06e22e0eaaf9a4f578251cf05123c8ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightSpawnTime: 0
+  lightSpawnTime: 0.5
   enemyPool: []
 --- !u!212 &779567207
 SpriteRenderer:
@@ -809,15 +809,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels: 5
   level: 1
-  spawnZ: 0
-  speed: 100
+  spawnZ: 300
+  speed: 50
   upperBound: 2.6
   rightBound: 4.7
   tunnel: {fileID: 0}
   score: 0
   lives: 5
-  enemyHealth: 0
-  enemyMaxHealth: 0
+  targetedEnemy: {fileID: 0}
 --- !u!4 &996675408
 Transform:
   m_ObjectHideFlags: 0
@@ -1050,7 +1049,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4221027548515500, guid: efaac50901a1f47edaff3098f9da1fe0, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 22.47
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4221027548515500, guid: efaac50901a1f47edaff3098f9da1fe0, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1104,7 +1103,7 @@ Prefab:
     - target: {fileID: 114331968374688080, guid: efaac50901a1f47edaff3098f9da1fe0,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: efaac50901a1f47edaff3098f9da1fe0, type: 2}
