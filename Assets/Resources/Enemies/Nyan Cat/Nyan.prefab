@@ -1039,6 +1039,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73fbe0539c4894430a77c6cf5f8ed133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 0
+  maxHealth: 0
+  health: 0
   dead: 0
 --- !u!114 &114240044479135340
 MonoBehaviour:
@@ -1076,6 +1079,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad55b4a5c5a9894984d224431180520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnTimeMin:
+  - 5
+  - 5
+  - 0
+  - 0
+  - 0
+  spawnTimeMax:
+  - 15
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!212 &212174072326842504
 SpriteRenderer:
   m_ObjectHideFlags: 1
