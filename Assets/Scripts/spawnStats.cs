@@ -5,4 +5,5 @@ using UnityEngine;
 public class spawnStats : MonoBehaviour {
 	public float[] spawnTimeMin;
 	public float[] spawnTimeMax;
+	public float[] spawnProbibility;
 }

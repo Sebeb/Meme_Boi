@@ -7,7 +7,7 @@ public class spawner : MonoBehaviour
 
     public float lightSpawnTime;
     float nextLightSpawn;
-    public GameObject[] enemyPool;
+    public List <GameObject> enemyPool;
     public List<GameObject> SpawnQueue;
     public List<float> SpawnSchedule;
 
@@ -15,7 +15,13 @@ public class spawner : MonoBehaviour
     void Start()
     {
         game.controller.spawnZ = transform.position.z;
-        enemyPool = Resources.LoadAll<GameObject>("Enemies/");
+		#region Populate Enemy Spawn Pool
+		foreach (GameObject enemy in Resources.LoadAll<GameObject>("Enemies/")) {
+			if (enemy.GetComponent<spawnStats> () != null)
+				enemyPool.Add (enemy);
+		}
+		#endregion
+
         PopulateSpawnList();
     }
 
@@ -30,6 +36,8 @@ public class spawner : MonoBehaviour
     void AddEnemyToQueue(GameObject enemy)
     {
         spawnStats schedule = enemy.GetComponent<spawnStats>();
+
+		if (schedule.spawnTimeMax[game.controller.level]!=0){
         float spawnTime = Time.time + Random.Range(schedule.spawnTimeMin[game.controller.level], schedule.spawnTimeMax[game.controller.level]);
         if (SpawnQueue.Count != 0)
         {
@@ -57,6 +65,7 @@ public class spawner : MonoBehaviour
             SpawnSchedule.Add(spawnTime);
         }
     }
+	}
 
     void FixedUpdate()
     {
@@ -75,7 +84,7 @@ public class spawner : MonoBehaviour
             GameObject enemy = SpawnQueue[0];
             SpawnQueue.RemoveAt(0);
             SpawnSchedule.RemoveAt(0);
-
+			if (enemy.GetComponent<spawnStats>().spawnProbibility[game.controller.level]>=Random.Range(0,101));
             Vector2 enemySize = enemy.GetComponent<BoxCollider>().size;
             Vector3 position = new Vector3(Random.Range(-game.controller.rightBound + (enemySize.x / 2),
                                                         game.controller.rightBound - (enemySize.x / 2)),

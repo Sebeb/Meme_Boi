@@ -5,7 +5,7 @@ using UnityEngine;
 public class game : MonoBehaviour
 {
 	public int levels;
-	[Range (1,5)]
+	[Range (0,5)]
 	public int level;
 	public static game controller;
     public static spawner spawner;

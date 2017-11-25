@@ -1081,14 +1081,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnTimeMin:
   - 0
-  - 4
+  - 2
   - 0
   - 0
   - 0
   - 0
   spawnTimeMax:
   - 0
-  - 7
+  - 4
+  - 0
+  - 0
+  - 0
+  - 0
+  spawnProbibility:
+  - 0
+  - 50
   - 0
   - 0
   - 0
