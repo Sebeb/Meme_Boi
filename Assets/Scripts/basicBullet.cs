@@ -31,10 +31,14 @@ public class basicBullet : MonoBehaviour {
         if (collision.gameObject.GetComponent<enemy>()!=null){
             GameObject otherObejct = collision.gameObject;
 			if (!otherObejct.GetComponent<enemy> ().dead) {
-				otherObejct.GetComponent<enemy> ().life = Mathf.Clamp (otherObejct.GetComponent<enemy> ().life - damage, 0, 9999);
-				game.controller.targetedEnemy = otherObejct.GetComponent<enemy> ();
+                otherObejct.GetComponent<enemy> ().health = Mathf.Clamp (otherObejct.GetComponent<enemy> ().health - damage, 0, otherObejct.GetComponent<enemy>().maxHealth);
+                if (otherObejct.GetComponent<enemy>().health != 0)
+                {
+                    DestroyObject(gameObject);
+                    game.controller.targetedEnemy = otherObejct.GetComponent<enemy>();
+                }
 				otherObejct.GetComponent<enemy>().OnHit();
-				Destroy (gameObject, 0.3f);
+                Destroy(gameObject, 0.03f);
 			}
         }
     }

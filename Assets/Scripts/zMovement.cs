@@ -6,6 +6,8 @@ using UnityEngine;
 public class zMovement : MonoBehaviour {
     Rigidbody rigidBody;
     public float speed;
+    public bool relativeSpeed;
+    float gameSpeed;
     AudioSource audio;
     public bool moving = true;
 
@@ -13,16 +15,28 @@ public class zMovement : MonoBehaviour {
         rigidBody = GetComponent<Rigidbody>();
         audio = GetComponent<AudioSource>();
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-        if (moving)
-            rigidBody.velocity = new Vector3(rigidBody.velocity.x, rigidBody.velocity.y, -(game.controller.speed + speed));
 
-        if (transform.position.z < -game.controller.spawnZ || transform.position.x < (-game.controller.upperBound - 3))
-            Destroy(gameObject);
-        if (audio != null && transform.position.z < 0)
-            audio.maxDistance = 30;
-        
+    void Start()
+    {
+        if (relativeSpeed)
+            gameSpeed = game.controller.speed;
+        rigidBody.velocity = new Vector3(rigidBody.velocity.x, rigidBody.velocity.y, -(speed + gameSpeed));
+    }
+
+    void FixedUpdate () {
+        if (moving)
+        {
+            if (relativeSpeed)
+                gameSpeed = game.controller.speed;
+            if (rigidBody.velocity.z > -(speed + gameSpeed))
+                rigidBody.AddForce(new Vector3(0, 0, -80));
+            else
+                rigidBody.velocity = new Vector3(rigidBody.velocity.x, rigidBody.velocity.y, -(speed+gameSpeed));
+
+            if (transform.position.z < -game.controller.spawnZ || transform.position.x < (-game.controller.upperBound - 3))
+                Destroy(gameObject);
+            if (audio != null && transform.position.z < 0)
+                audio.maxDistance = 30;
+        }
 	}
 }
