@@ -6,7 +6,6 @@ using UnityEngine;
 public class zMovement : MonoBehaviour {
     Rigidbody rigidBody;
     public float speed;
-    public bool relativeSpeed;
     float gameSpeed;
     AudioSource audio;
     public bool moving = true;
@@ -18,20 +17,16 @@ public class zMovement : MonoBehaviour {
 
     void Start()
     {
-        if (relativeSpeed)
-            gameSpeed = game.controller.speed;
-        rigidBody.velocity = new Vector3(rigidBody.velocity.x, rigidBody.velocity.y, -(speed + gameSpeed));
+        rigidBody.velocity = new Vector3(rigidBody.velocity.x, rigidBody.velocity.y, -(speed + game.controller.speed));
     }
 
     void FixedUpdate () {
         if (moving)
         {
-            if (relativeSpeed)
-                gameSpeed = game.controller.speed;
             if (rigidBody.velocity.z > -(speed + gameSpeed))
                 rigidBody.AddForce(new Vector3(0, 0, -80));
             else
-                rigidBody.velocity = new Vector3(rigidBody.velocity.x, rigidBody.velocity.y, -(speed+gameSpeed));
+                rigidBody.velocity = new Vector3(rigidBody.velocity.x, rigidBody.velocity.y, -(speed+game.controller.speed));
 
             if (transform.position.z < -game.controller.spawnZ || transform.position.x < (-game.controller.upperBound - 3))
                 Destroy(gameObject);
