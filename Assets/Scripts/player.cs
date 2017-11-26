@@ -10,6 +10,7 @@ public class player : MonoBehaviour
     float reloadTime;
     public sfxManager fireSFX;
     public bool mouseControl;
+    Vector3 velocity = Vector3.zero;
 
     private void OnTriggerEnter(Collider enemyCollider)
     {
@@ -86,8 +87,9 @@ public class player : MonoBehaviour
         else{
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Confined;
-            transform.position = new Vector3(Mathf.Clamp(-game.controller.rightBound + ((Input.mousePosition.x / Screen.width)) * game.controller.rightBound*2,-game.controller.rightBound,game.controller.rightBound),
+            Vector3 targetPosition = new Vector3(Mathf.Clamp(-game.controller.rightBound + ((Input.mousePosition.x / Screen.width)) * game.controller.rightBound*2,-game.controller.rightBound,game.controller.rightBound),
                                              Mathf .Clamp(-game.controller.upperBound + ((Input.mousePosition.y / Screen.height)) * game.controller.upperBound*2,-game.controller.upperBound,game.controller.upperBound),0);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity,0.01f,movementSpeed*100);
         }
             #endregion
     }

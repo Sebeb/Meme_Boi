@@ -1124,21 +1124,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnTimeMin:
   - 0
-  - 4
+  - 2
   - 0
   - 0
   - 0
   - 0
   spawnTimeMax:
   - 0
-  - 6
+  - 4
   - 0
   - 0
   - 0
   - 0
   spawnProbibility:
   - 0
-  - 70
+  - 80
   - 0
   - 0
   - 0
@@ -1178,7 +1178,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7448b4e442e74c148b6e04818f40e8ad, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.891}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

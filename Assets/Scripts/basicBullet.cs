@@ -8,9 +8,13 @@ public class basicBullet : MonoBehaviour {
 	public float speed;
 	public float reloadTime;
 	public int damage;
+    MeshRenderer texture;
+    float a;
 
 	void Awake(){
 		rigidBody = GetComponent<Rigidbody> ();
+        texture = GetComponent<MeshRenderer>();
+        texture.material.color = new Color(1, 1, 1, a);
 	}
 
 	void Start () {
@@ -20,6 +24,10 @@ public class basicBullet : MonoBehaviour {
 
     void FixedUpdate()
     {
+        if (a<1){
+            a = Mathf.Clamp(a+0.5f,0,1);
+            texture.material.color = new Color(1, 1, 1, a);
+        }
         if (transform.position.z > game.controller.spawnZ)
             Destroy(gameObject);
 		if (rigidBody.velocity.z < speed)
