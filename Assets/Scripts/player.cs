@@ -10,6 +10,15 @@ public class player : MonoBehaviour
     float reloadTime;
     public sfxManager fireSFX;
 
+    private void OnTriggerEnter(Collider enemyCollider)
+    {
+        Debug.Log("We hit: " + enemyCollider.name);
+        if (enemyCollider.tag == "Enemies" && !enemyCollider.gameObject.GetComponent<enemy>().dead)
+        {
+            game.controller.lives--;
+            print(game.controller.lives);
+        }
+    }
 
     void Start()
     {
