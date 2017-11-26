@@ -10,14 +10,19 @@ public class player : MonoBehaviour
     float reloadTime;
     public sfxManager fireSFX;
     public bool mouseControl;
+    Vector3 velocity = Vector3.zero;
+    public bool dead;
 
-    private void OnTriggerEnter(Collider enemyCollider)
+
+    void OnTriggerEnter(Collider enemyCollider)
     {
         Debug.Log("We hit: " + enemyCollider.name);
         if (enemyCollider.tag == "Enemies" && !enemyCollider.gameObject.GetComponent<enemy>().dead)
         {
             game.controller.lives--;
             print(game.controller.lives);
+            if (game.controller.lives <= 0)
+                dead = true;
         }
     }
 
@@ -64,33 +69,43 @@ public class player : MonoBehaviour
     void FixedUpdate()
     {
         if (Input.mousePosition.x > 0 && Input.mousePosition.x < Screen.height * 2 && Input.mousePosition.y > 0 && Input.mousePosition.y < Screen.height * 2)
-        { if(Input.GetMouseButtonDown(0))
-            mouseControl = true;
+        {
+            if (Input.GetMouseButtonDown(0))
+                mouseControl = true;
         }
-        else
-            mouseControl = false;
-        if (Input.GetAxis("Horizontal")!=0||
+        if (Input.GetAxis("Horizontal") != 0 ||
             Input.GetAxis("Vertical") != 0)
             mouseControl = false;
-            
-        
+
+
         #region Movement
-        if (!mouseControl)
+        if (!dead)
         {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            transform.position = new Vector3(
-                Mathf.Clamp(transform.position.x + Input.GetAxis("Horizontal") * movementSpeed, -game.controller.rightBound, game.controller.rightBound),
-                Mathf.Clamp(transform.position.y + Input.GetAxis("Vertical") * movementSpeed, -game.controller.upperBound, game.controller.upperBound), 0);
-        }
-        else{
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Confined;
-            transform.position = new Vector3(Mathf.Clamp(-game.controller.rightBound + ((Input.mousePosition.x / Screen.width)) * game.controller.rightBound*2,-game.controller.rightBound,game.controller.rightBound),
-                                             Mathf .Clamp(-game.controller.upperBound + ((Input.mousePosition.y / Screen.height)) * game.controller.upperBound*2,-game.controller.upperBound,game.controller.upperBound),0);
-        }
+            if (!mouseControl)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                transform.position = new Vector3(
+                    Mathf.Clamp(transform.position.x + Input.GetAxis("Horizontal") * movementSpeed, -game.controller.rightBound, game.controller.rightBound),
+                    Mathf.Clamp(transform.position.y + Input.GetAxis("Vertical") * movementSpeed, -game.controller.upperBound, game.controller.upperBound), 0);
+            }
+            else
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Confined;
+                Vector3 targetPosition = new Vector3(Mathf.Clamp(-game.controller.rightBound + ((Input.mousePosition.x / Screen.width)) * game.controller.rightBound * 2, -game.controller.rightBound, game.controller.rightBound),
+                                                 Mathf.Clamp(-game.controller.upperBound + ((Input.mousePosition.y / Screen.height)) * game.controller.upperBound * 2, -game.controller.upperBound, game.controller.upperBound), 0);
+                transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, 0.01f, movementSpeed * 100);
+            }
             #endregion
-    }
+        }
+
+        else
+        {
+            transform.position = Vector3.SmoothDamp(transform.position, new Vector3(1.1f, -1.8f, 0), ref velocity, 0.01f, movementSpeed * 10);
+            transform.rotation = Quaternion.Euler(0, 0, -45);
+        }
+    }  
 }
 
-public enum Weapons { MNH, Other };
+public enum Weapons { MNH, Wow };
