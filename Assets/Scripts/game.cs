@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class game : MonoBehaviour
@@ -21,8 +22,18 @@ public class game : MonoBehaviour
 	public int lives;
 	public enemy targetedEnemy;
     AudioSource audio;
+    public int maxEnemyHealth;
+    public int enemyHealth;
+    public string enemyName;
 
+    //UI stuff
+    public GameObject enemyNameText;
+    public GameObject scoreText;
+    public GameObject enemyLifeBar;
+    public GameObject[] playerLivesImages;
+    public GameObject gameOverText;
 
+    public Sprite playerLifeDisabled;
 
     void Awake()
     {
@@ -42,5 +53,54 @@ public class game : MonoBehaviour
         else
             if (audio.pitch > 0.15f)
                 audio.pitch /= 1.004f;
+
+        //UI Updates
+
+        //Check if Enemy passed the Player
+        if (targetedEnemy != null && targetedEnemy.transform.position.z < 0)
+        {
+            targetedEnemy = null;
+        }
+
+        //If Player is fighting against an enemy
+        if (targetedEnemy != null)
+        {
+            enemyName = targetedEnemy.name;
+            enemyNameText.SetActive(true);
+            enemyNameText.GetComponent<Text>().text = enemyName;
+
+            enemyLifeBar.SetActive(true);
+            enemyLifeBar.GetComponent<Slider>().value = (float)enemyHealth / (float)maxEnemyHealth;
+        }
+        //Else hide Enemy Name and Health
+        else
+        {
+            enemyNameText.SetActive(false);
+            enemyLifeBar.SetActive(false);
+        }
+
+        //Change Life Sprite to Life-Lost Sprite
+        for(int i = playerLivesImages.Length; i > lives; i--)
+        {
+            if(!(playerLivesImages[i-1].GetComponent<Image>().sprite.Equals(playerLifeDisabled)))
+                playerLivesImages[i-1].GetComponent<Image>().sprite = playerLifeDisabled;
+        }
+
+        //If Game Over activate GameOver Text and disable everything else
+        if(lives == 0)
+        {
+            for (int i = 0; i < playerLivesImages.Length; i++)
+            {
+                playerLivesImages[i].SetActive(false);
+            }
+            enemyNameText.SetActive(false);
+            enemyLifeBar.SetActive(false);
+            scoreText.SetActive(false);
+
+            gameOverText.SetActive(true);
+            gameOverText.GetComponent<Text>().text = "Game Over\nScore: " + score;
+        }
+        
+        scoreText.GetComponent<Text>().text = score.ToString();
 	}
 }
