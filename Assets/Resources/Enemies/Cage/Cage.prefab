@@ -250,6 +250,7 @@ MonoBehaviour:
   health: 10
   dead: 0
   pitchDuck: 0
+  name: Cage
 --- !u!212 &212777319250461718
 SpriteRenderer:
   m_ObjectHideFlags: 1

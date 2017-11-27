@@ -1085,6 +1085,7 @@ MonoBehaviour:
   health: 5
   dead: 0
   pitchDuck: 0
+  name: Nyan
 --- !u!114 &114240044479135340
 MonoBehaviour:
   m_ObjectHideFlags: 1

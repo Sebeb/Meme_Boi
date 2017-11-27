@@ -562,7 +562,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
-  relativeSpeed: 1
   moving: 1
 --- !u!114 &114137744626355132
 MonoBehaviour:
@@ -611,6 +610,7 @@ MonoBehaviour:
   health: 5
   dead: 0
   pitchDuck: 0
+  name: YeahBoi
 --- !u!212 &212157998079522410
 SpriteRenderer:
   m_ObjectHideFlags: 1

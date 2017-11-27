@@ -33,7 +33,7 @@ public class player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetAxis("Fire1") > 0 && reloadTime <= Time.time)
+        if (Input.GetAxis("Fire1") > 0 && reloadTime <= Time.time && game.controller.lives != 0)
         {
             Fire();
         }
