@@ -26,7 +26,8 @@ public class sfxManager : MonoBehaviour
 
     public AudioClip GetClip()
     {
-        if (currentClip + 1 != clip.Length)
+        
+        if (currentClip + 1 != clip.Length & SentancesStart.Length != 0)
         {
             currentClip++;
             if (currentSentance + 1 != SentancesStart.Length)
@@ -44,8 +45,13 @@ public class sfxManager : MonoBehaviour
 
     void Randomise()
     {
-        currentSentance = Random.Range(0, SentancesStart.Length);
-        currentClip = SentancesStart[currentSentance];
+        if (SentancesStart.Length != 0)
+        {
+            currentSentance = Random.Range(0, SentancesStart.Length);
+            currentClip = SentancesStart[currentSentance];
+        }
+        else
+            currentClip = Random.Range(0, clip.Length);
 
     }
 }

@@ -20,9 +20,9 @@ public class wallBounce : MonoBehaviour {
 	void Update () {
 		if (!enemy.dead) {
 			if (rigidBody.velocity.x < 0)
-				transform.localScale = new Vector3 (-1, 1, 1);
+                transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
 			else
-				transform.localScale = new Vector3 (1, 1, 1);
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
 		}
 	}
 }

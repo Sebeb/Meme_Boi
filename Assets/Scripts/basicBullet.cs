@@ -36,18 +36,11 @@ public class basicBullet : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<enemy>()!=null){
+        if (collision.gameObject.GetComponent<enemy>() != null)
+        {
             GameObject otherObejct = collision.gameObject;
-			if (!otherObejct.GetComponent<enemy> ().dead) {
-                otherObejct.GetComponent<enemy> ().health = Mathf.Clamp (otherObejct.GetComponent<enemy> ().health - damage, 0, otherObejct.GetComponent<enemy>().maxHealth);
-                if (otherObejct.GetComponent<enemy>().health != 0)
-                {
-                    DestroyObject(gameObject);
-                    game.controller.targetedEnemy = otherObejct.GetComponent<enemy>();
-                }
-				otherObejct.GetComponent<enemy>().OnHit();
-                Destroy(gameObject, 0.03f);
-			}
-        }
+            if (!otherObejct.GetComponent<enemy>().OnHit(damage))
+                Destroy(gameObject);
+            }
     }
 }

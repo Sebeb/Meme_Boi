@@ -17,21 +17,25 @@ public class zMovement : MonoBehaviour {
 
     void Start()
     {
-        rigidBody.velocity = new Vector3(rigidBody.velocity.x, rigidBody.velocity.y, -(speed + game.controller.speed));
+        if (moving)
+            rigidBody.velocity = new Vector3(rigidBody.velocity.x, rigidBody.velocity.y, -(speed + game.controller.speed));
     }
 
     void FixedUpdate () {
         if (moving)
         {
             if (rigidBody.velocity.z > -(speed + gameSpeed))
-                rigidBody.AddForce(new Vector3(0, 0, -80));
-            else
-                rigidBody.velocity = new Vector3(rigidBody.velocity.x, rigidBody.velocity.y, -(speed+game.controller.speed));
+                rigidBody.AddForce(new Vector3(0, 0, -700));
 
-            if (transform.position.z < -game.controller.spawnZ || transform.position.x < (-game.controller.upperBound - 3))
+            if (transform.position.z < -game.controller.spawnZ || transform.position.x < (-game.controller.upperBound - 3)
+                ||transform.position.x<-game.controller.rightBound|| transform.position.x > game.controller.rightBound
+                | transform.position.y < -game.controller.upperBound || transform.position.y > game.controller.rightBound)
                 Destroy(gameObject);
             if (audio != null && transform.position.z < 0)
+            {
                 audio.maxDistance = 30;
+                audio.volume /= 1.3f;
+            }
         }
 	}
 }

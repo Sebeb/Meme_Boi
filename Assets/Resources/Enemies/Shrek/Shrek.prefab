@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4210185974943434}
   - component: {fileID: 114306645870478234}
+  - component: {fileID: 114799953871774822}
   m_Layer: 0
   m_Name: Shrek
   m_TagString: Enemies
@@ -216,3 +217,19 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+--- !u!114 &114799953871774822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1351306478023378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73fbe0539c4894430a77c6cf5f8ed133, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  health: 100
+  dead: 0
+  pitchDuck: 0
+  name: swamp boi

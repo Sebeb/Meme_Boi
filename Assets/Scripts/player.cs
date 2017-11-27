@@ -7,6 +7,7 @@ public class player : MonoBehaviour
     [Range(0, 1)]
     public float movementSpeed;
     public Weapons currentWeapon;
+    public bool invincible;
     float reloadTime;
     public sfxManager fireSFX;
     public bool mouseControl;
@@ -16,19 +17,26 @@ public class player : MonoBehaviour
 
     void OnTriggerEnter(Collider enemyCollider)
     {
-        Debug.Log("We hit: " + enemyCollider.name);
-        if (enemyCollider.tag == "Enemies" && !enemyCollider.gameObject.GetComponent<enemy>().dead)
+        if (enemyCollider.tag == "Enemies" && !enemyCollider.gameObject.GetComponent<enemy>().dead && !invincible)
         {
-            game.controller.lives--;
-            print(game.controller.lives);
-            if (game.controller.lives <= 0)
-                dead = true;
+            OnHit();
+        }
+        if (enemyCollider.tag == "Pickup")
+        {
+           //pickup!
         }
     }
 
     void Start()
     {
         SwitchWeapon(Weapons.MNH);
+    }
+
+    void OnHit(){
+        game.controller.lives--;
+        if (game.controller.lives <= 0)
+            dead = true;
+        game.controller.timeSpeed = 0.2f;
     }
 
     void Update()
@@ -45,7 +53,7 @@ public class player : MonoBehaviour
         switch (weapon)
         {
             case Weapons.MNH:
-                GameObject soundManager = Instantiate(Resources.Load("Weapons/MNH/SFX Manager")) as GameObject;
+                GameObject soundManager = Instantiate(Resources.Load("SFX Manager")) as GameObject;
                 fireSFX = soundManager.GetComponent<sfxManager>();
                 soundManager.transform.parent = transform;
                 break;

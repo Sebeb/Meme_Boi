@@ -16,7 +16,7 @@ public class spawner : MonoBehaviour
     {
         game.controller.spawnZ = transform.position.z;
 		#region Populate Enemy Spawn Pool
-		foreach (GameObject enemy in Resources.LoadAll<GameObject>("Enemies/")) {
+		foreach (GameObject enemy in Resources.LoadAll<GameObject>("")) {
 			if (enemy.GetComponent<spawnStats> () != null)
 				enemyPool.Add (enemy);
 		}
@@ -73,7 +73,7 @@ public class spawner : MonoBehaviour
         if (Time.fixedTime > nextLightSpawn)
         {
             nextLightSpawn += lightSpawnTime;
-            GameObject light = Instantiate(Resources.Load("Light", typeof(GameObject)), transform.position, Quaternion.identity) as GameObject;
+            GameObject light = Instantiate(Resources.Load("Scenery/Light", typeof(GameObject)), transform.position, Quaternion.identity) as GameObject;
             light.transform.parent = game.controller.tunnel.transform;
         }
         #endregion
